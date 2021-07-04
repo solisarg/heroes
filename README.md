@@ -6,6 +6,7 @@ The application use a local temporal list that will be recreated each time you r
 The services are simulated using an interceptor that load a local json file, and the same technique is used to show the loading spinner (delayed for 1 second, since there´s no loading time because data is local)
 Basic unit testing is in place. The list of heroes comes from the original Heroes tutorial from John Papa 
 where everyone begins at some point.
+We use Angular Material as the base build elements for the whole app.
 
 You can play with the demo at https://devarg3818.com/heroes/
 
