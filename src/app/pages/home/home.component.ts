@@ -41,7 +41,9 @@ export class HomeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onRowClicked(row) {
-    this._router.navigate(['heroes/'+row.id])
+  onRowClicked(row, event) 
+  {
+    if(event.target.id)
+      this._router.navigate(['heroes/'+event.target.id])
   }
 }
