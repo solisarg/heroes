@@ -24,7 +24,6 @@ const addHeroe = (request: HttpRequest<any>) => {
   //check that name is not in use
   let exist = heroes.filter(item => item.name == heroe.name)[0]
   if(exist) throw(new Error('El nombre ya existe'))
-  //return alert('El nombre ya existe')
   //generate fake id
   heroe.id = heroes[heroes.length-1].id + 1
   heroes.push(heroe);

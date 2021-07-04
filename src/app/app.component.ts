@@ -10,6 +10,8 @@ import { LoadingService } from './services/loading.services';
 export class AppComponent {
   loading:boolean = false;
   title = 'heroes';
+  private timeout:number = 10000;
+  private timeoutInterval;
 
   constructor(
     private _loading:LoadingService
@@ -27,9 +29,13 @@ export class AppComponent {
     this._loading.loadingSub
     .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
       .subscribe((cargando) => {
-        if(cargando)
+        if(cargando){
           this.loading = cargando;
-        else //delay so it can be seen
+          //timeout to avoid blocking UI
+          this.timeoutInterval = setTimeout(()=>{
+            this.loading = false;
+          }, this.timeout)
+        } else //delay so it can be seen
           setTimeout(()=>{
             this.loading = cargando;
           }, 1000)
