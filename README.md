@@ -7,6 +7,8 @@ The services are simulated using an interceptor that load a local json file, and
 Basic unit testing is in place. The list of heroes comes from the original Heroes tutorial from John Papa 
 where everyone begins at some point.
 
+You can play with the demo at https://devarg3818.com/heroes/
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
