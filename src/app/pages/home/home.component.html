@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row text-center">
+    <div>
+      <span class="h3">Heroes latinos !</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <span><button mat-raised-button color="primary" routerLink="/heroes/0">Crear</button></span>
+    </div>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Super" #input>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef width="10%"> No. </th>
+        <td mat-cell *matCellDef="let element" width="10%"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef width="30%"> Name </th>
+        <td mat-cell *matCellDef="let element" width="30%"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Strength Column -->
+      <ng-container matColumnDef="strength">
+        <th mat-header-cell *matHeaderCellDef width="20%"> Strength </th>
+        <td mat-cell *matCellDef="let element" width="20%"> {{element.strength}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element"><a href="javascript:void(0)" (click)="edit($event)"><span class="material-icons">edit</span></a></td>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"></mat-row>
+    </table>
+  </div>
+  <mat-paginator #paginator [length]="totalHeroes"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[5, 10]">
+    </mat-paginator>
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row text-center mt-4 h3">
+    <span>Héroes latinos <i>{{heroe.name}}</i></span><span class="ml-4"><a href="javascript:void(0)" routerLink="/heroes">Volver</a></span>
+  </div>
+  <div class="row mt-4">
+    <div class="col-3">&nbsp;</div>
+    <div class="col-6 text-center"><form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label># Id</mat-label>
+        <input matInput name="name" #name="ngModel" type="number" [(ngModel)]="heroe.id" disabled>
+      </mat-form-field>
+      </form>
+    </div>
+    <div class="col-3">&nbsp;</div>
+  </div>
+  <div class="row">
+    <div class="col-3">&nbsp;</div>
+    <div class="col-6 text-center"><form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput name="name" #name="ngModel" type="text" [(ngModel)]="heroe.name" required>
+        <mat-error *ngIf="nameError">
+          Por favor escriba un nombre para nuestro héroe
+        </mat-error>
+      </mat-form-field>
+      </form>
+    </div>
+    <div class="col-3">&nbsp;</div>
+  </div>
+  <div class="row">
+    <div class="col-3">&nbsp;</div>
+    <div class="col-6 text-center">
+      <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Característica</mat-label>
+        <input matInput name="strength" type="text" [(ngModel)]="heroe.strength" required>
+        <mat-error *ngIf="nameError">
+          Por favor escriba una característica para nuestro héroe
+        </mat-error>
+      </mat-form-field>
+      </form>
+    </div>
+    <div class="col-3">&nbsp;</div>
+  </div>
+  <div class="row">
+    <div class="col-5">&nbsp;</div>
+    <div class="col-1 text-center" *ngIf="!heroe.id">
+      <button mat-raised-button color="primary" (click)="addHero()" [disabled]="heroe.name=='' || heroe.strength==''">Agregar</button>
+    </div>
+    <div class="col-1 text-center" *ngIf="heroe.id" (click)="updateHero()">
+      <button mat-raised-button color="primary">Actualizar</button>
+    </div>
+    <div class="col-1 text-center" *ngIf="heroe.id">
+      <button mat-raised-button color="warn" (click)="deleteHero()">Borrar</button>
+    </div>
+    <div class="col-5">&nbsp;</div>
+  </div>
+</div>
+

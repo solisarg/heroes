@@ -1,0 +1,12 @@
+[
+    { "id": 11, "name": "Mr. Nice", "strength":"Fuerza" },
+    { "id": 12, "name": "Narco", "strength":"Sorpresa" },
+    { "id": 13, "name": "Bombasto", "strength":"Fuerza" },
+    { "id": 14, "name": "Celeritas", "strength":"Velocidad" },
+    { "id": 15, "name": "Magneta", "strength":"Poder" },
+    { "id": 16, "name": "RubberMan", "strength":"Fuerza" },
+    { "id": 17, "name": "Dynama", "strength":"Fuerza" },
+    { "id": 18, "name": "Dr IQ", "strength":"Inteligencia" },
+    { "id": 19, "name": "Magma", "strength":"Fuerza" },
+    { "id": 20, "name": "Tornado", "strength":"Fuerza" }
+]
