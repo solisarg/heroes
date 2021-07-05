@@ -10,7 +10,7 @@ import { LoadingService } from './services/loading.services';
 export class AppComponent {
   loading:boolean = false;
   title = 'heroes';
-  private timeout:number = 10000;
+  private timeout:number = 5000;
   private timeoutInterval;
 
   constructor(
