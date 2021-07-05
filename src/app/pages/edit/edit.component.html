@@ -44,13 +44,13 @@
   </div>
   <div class="row">
     <div class="col-5">&nbsp;</div>
-    <div class="col-1 text-center" *ngIf="!heroe.id">
+    <div class="col-1 text-center p-2" *ngIf="!heroe.id">
       <button mat-raised-button color="primary" (click)="addHero()" [disabled]="heroe.name=='' || heroe.strength==''">Agregar</button>
     </div>
-    <div class="col-1 text-center" *ngIf="heroe.id" (click)="updateHero()">
+    <div class="col-1 text-center p-2" *ngIf="heroe.id" (click)="updateHero()">
       <button mat-raised-button color="primary">Actualizar</button>
     </div>
-    <div class="col-1 text-center" *ngIf="heroe.id">
+    <div class="col-1 text-center p-2" *ngIf="heroe.id">
       <button mat-raised-button color="warn" (click)="deleteHero()">Borrar</button>
     </div>
     <div class="col-5">&nbsp;</div>
