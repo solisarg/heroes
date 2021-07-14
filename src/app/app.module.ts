@@ -18,6 +18,7 @@ import { EditComponent } from './pages/edit/edit.component';
 import { FormsModule } from '@angular/forms';
 import { LoadingService } from './services/loading.services';
 import { HttpRequestInterceptor } from './services/http-request-interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HttpRequestInterceptor } from './services/http-request-interceptor';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule, MatInputModule,
     MatTableModule,
