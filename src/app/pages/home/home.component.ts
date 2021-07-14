@@ -21,26 +21,31 @@ export class HomeComponent implements OnInit {
 
   constructor(private service:HeroService, private _router:Router) { }
 
+  //Load the list of heroes on Init
   ngOnInit(): void {
     this.service.getHeroes()
       .subscribe(result => this.onHeroes(result))
   }
 
+  //Paginate the table
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
+  //Show heroes list
   onHeroes(result){
     this.heroes = result;
     this.totalHeroes = this.heroes.length;
     this.dataSource = new MatTableDataSource(this.heroes);
   }
 
+  //filter hero list
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  //handle row clicked and navigate if is a named link (from edit link)
   onRowClicked(row, event) 
   {
     if(event.target.id)

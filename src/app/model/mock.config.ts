@@ -6,11 +6,14 @@ import { of } from 'rxjs';
 
 let heroes: Hero[] = (data as any).default;
 
+//Simulate list of heros call
 const getHeroes = (request:HttpRequest<any>) => {
   return of(new HttpResponse({
     status: 200, body: heroes
   }));
 };
+
+//Simulate single hero call
 const getHeroe = (request: HttpRequest<any>) => {
   const id = parseInt(extractIdPathParamFromUrl(request));
   const heroe = heroes.find(c => c.id === id);
@@ -19,6 +22,7 @@ const getHeroe = (request: HttpRequest<any>) => {
   }));
 };
 
+//simulate add a Hero
 const addHeroe = (request: HttpRequest<any>) => {
   const heroe = request.body as Hero;
   //check that name is not in use
@@ -32,6 +36,7 @@ const addHeroe = (request: HttpRequest<any>) => {
   }));
 };
 
+//Simulate edit a Hero
 const editHeroe = (request: HttpRequest<any>) => {
   const id = parseInt(extractIdPathParamFromUrl(request));
   const heroeIndex = heroes.findIndex(c => c.id === id);
@@ -42,6 +47,7 @@ const editHeroe = (request: HttpRequest<any>) => {
   }));
 };
 
+//Simulate delete a Hero
 const removeHeroe = (request: HttpRequest<any>) => {
   const id = parseInt(extractIdPathParamFromUrl(request));
   heroes = heroes.filter(c => c.id !== id);
@@ -50,10 +56,12 @@ const removeHeroe = (request: HttpRequest<any>) => {
   }));
 };
 
+//extract the endpoint
 const extractIdPathParamFromUrl = (request: HttpRequest<any>) => {
   const requestUrl = new URL(request.url);
   return requestUrl.pathname.split('/').pop();
 };
+
 export const selectHandler = (request: HttpRequest<any>) => {
   const requestUrl = new URL(request.url);
   const getOneRegexp: RegExp = new RegExp(`/heroes/[0-9a-zA-Z]+`);

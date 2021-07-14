@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hero } from 'src/app/model/dto';
 import { HeroService } from 'src/app/services/hero.service';
@@ -10,7 +10,7 @@ import { UpdateDialog, CreateDialog, DeleteDialog, ErrorDialog} from '../../comp
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditComponent {
   public heroe:Hero = Hero.getInstance();
   public nameError = false;
   public strengthError = false;
@@ -20,6 +20,8 @@ export class EditComponent implements OnInit {
     private _router:Router,
     private heroService:HeroService,
     private dialog:MatDialog) {
+    //subscribe to id, this way we can change manually the url and 
+    //get different heros
     this.route.params.subscribe(params =>{
       let id = params['id'];
       if(!isNaN(id) && id>0){
@@ -29,17 +31,21 @@ export class EditComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-  }
-
+  //Add a Hero
   addHero(){
-    this.nameError = this.heroe.name == '';
-    this.strengthError = this.heroe.strength =='';
-    if(!this.nameError && !this.strengthError)
+    if(this.validate())
       this.heroService.save(this.heroe)
         .subscribe(result => this.added(result), (error) => this.onError('No se ha podido crear el heroe, verifique que el nombre no exista'))
   }
 
+  //validate a Hero
+  validate():boolean{
+    this.nameError = (this.heroe.name == '');
+    this.strengthError = (this.heroe.strength =='');
+    return (!this.nameError && !this.strengthError)
+  }
+
+  //Show errors
   onError(error){
     this.dialog.open(ErrorDialog, {
       data: {
@@ -48,6 +54,7 @@ export class EditComponent implements OnInit {
     });
   };
 
+  //show the confirmation dialog
   added(result){
     this.dialogRef = this.dialog.open(CreateDialog);
     this.dialogRef.afterClosed().subscribe(result => {
@@ -55,11 +62,14 @@ export class EditComponent implements OnInit {
     });
   }
 
+  //update the hero
   updateHero(){
+    if(this.validate())
     this.heroService.save(this.heroe)
       .subscribe(result => this.updated(result), (error) => this.onError('No se ha podido actualizar el héroe'))
   }
 
+  //Show update confirmation
   updated(result){
     this.dialogRef = this.dialog.open(UpdateDialog);
     this.dialogRef.afterClosed().subscribe(result => {
@@ -67,6 +77,7 @@ export class EditComponent implements OnInit {
     });
   }
 
+  //delete a Hero asking for confirmation in the dialog
   deleteHero(){
     this.dialogRef = this.dialog.open(DeleteDialog);
     this.dialogRef.afterClosed().subscribe(result => {
@@ -77,6 +88,7 @@ export class EditComponent implements OnInit {
     });
   }
 
+  //Redirect to list after deletion
   onDelete(result){
     this._router.navigate(['/heroes']);
   }

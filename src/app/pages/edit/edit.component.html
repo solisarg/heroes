@@ -20,7 +20,7 @@
         <mat-label>Nombre</mat-label>
         <input matInput name="name" #name="ngModel" type="text" [(ngModel)]="heroe.name" required>
         <mat-error *ngIf="nameError">
-          Por favor escriba un nombre para nuestro héroe
+          Escriba un nombre para nuestro héroe
         </mat-error>
       </mat-form-field>
       </form>
@@ -35,7 +35,7 @@
         <mat-label>Característica</mat-label>
         <input matInput name="strength" type="text" [(ngModel)]="heroe.strength" required>
         <mat-error *ngIf="nameError">
-          Por favor escriba una característica para nuestro héroe
+          Escriba una característica 
         </mat-error>
       </mat-form-field>
       </form>
