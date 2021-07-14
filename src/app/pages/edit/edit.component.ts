@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Hero } from 'src/app/model/dto';
 import { HeroService } from 'src/app/services/hero.service';
 import {MatDialog} from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UpdateDialog, CreateDialog, DeleteDialog, ErrorDialog} from '../../components/modals/modals';
 
 @Component({
@@ -14,18 +15,27 @@ export class EditComponent implements OnInit {
   public heroe:Hero = Hero.getInstance();
   public nameError = false;
   public strengthError = false;
+  public isAddMode = false;
+  private id:number;
+  public form: FormGroup;
 
   constructor(private route:ActivatedRoute,
+    private formBuilder: FormBuilder,
     private _router:Router,
     private heroService:HeroService,
     private dialog:MatDialog) {
-    this.route.params.subscribe(params =>{
-      let id = params['id'];
-      if(!isNaN(id) && id>0){
+    let id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
+
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      strength: ['', Validators.required],
+  });
+
+    if (!this.isAddMode) {
         this.heroService.getHero(id)
           .subscribe(result => this.heroe = result)
-      }
-    })
+    }
   }
 
   ngOnInit(): void {
