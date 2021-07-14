@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { HeroService } from 'src/app/services/hero.service';
 import { MockApiService } from 'src/app/services/mockapi.service';
@@ -43,24 +43,34 @@ describe('EditComponent', () => {
     expect(component.heroe.name).toBe('Mr. Nice');
   });
 
-  it('Add a Hero should open the confirm', (done:DoneFn) => {
+  it('Add a Hero should create it and open the confirm', (done:DoneFn) => {
     let hero:Hero = new Hero(100, 'Jorge', 'Angular')
     component.heroe = hero;
-    spyOn(component, 'added')
     component.addHero()
     expect(component.heroe.id).toBe(100);
     expect(component.heroe.name).toBe('Jorge');
-    expect(component.added).toHaveBeenCalled();
+    expect(component.dialogRef).toBeDefined();
+    component.dialogRef.componentInstance.closeDialog()
     done();
   });
 
-  it('Edit a Hero should open the confirm', (done:DoneFn) => {
+  it('Edit a Hero should update it and open the confirm', (done:DoneFn) => {
     component.heroe.name = 'Mr Smuggles';
-    spyOn(component, 'updateHero')
     component.updateHero()
     expect(component.heroe.name).toBe('Mr Smuggles');
-    expect(component.updateHero).toHaveBeenCalled();
+    expect(component.dialogRef).toBeDefined();
+    component.dialogRef.componentInstance.closeDialog()
+    component.deleteHero()
+    expect(component.dialogRef).toBeDefined();
+    component.dialogRef.componentInstance.closeDialog()
     done();
   });
 
+  it('Delete a Hero should redirect', (done:DoneFn) => {
+    spyOn(component, 'onDelete');
+    component.deleteHero();
+    expect(component.dialogRef).toBeDefined();
+    component.dialogRef.componentInstance.borrar()
+    done();
+  })
 });

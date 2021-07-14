@@ -26,10 +26,12 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('heroes');
   });
 
-  /*it('should render title', () => {
+  it(`Fake preload has a false flag`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('heroes app is running!');
-  });*/
+    const app = fixture.componentInstance;
+    app.loadingService.setLoading(true, 'any')
+    app.ngOnInit()
+    expect(app.loading).toBeFalse();
+  });
+
 });

@@ -14,7 +14,7 @@ export class AppComponent {
   private timeoutInterval;
 
   constructor(
-    private _loading:LoadingService
+    public loadingService:LoadingService
   ){ }
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class AppComponent {
    * This drives the display of the loading spinner.
    */
   listenToLoading(): void {
-    this._loading.loadingSub
+    this.loadingService.loadingSub
     .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
       .subscribe((cargando) => {
         if(cargando){

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hero } from 'src/app/model/dto';
 import { HeroService } from 'src/app/services/hero.service';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { UpdateDialog, CreateDialog, DeleteDialog, ErrorDialog} from '../../components/modals/modals';
 
 @Component({
@@ -14,7 +14,8 @@ export class EditComponent implements OnInit {
   public heroe:Hero = Hero.getInstance();
   public nameError = false;
   public strengthError = false;
-
+  dialogRef:MatDialogRef<any>;
+  
   constructor(private route:ActivatedRoute,
     private _router:Router,
     private heroService:HeroService,
@@ -48,8 +49,8 @@ export class EditComponent implements OnInit {
   };
 
   added(result){
-    const dialogRef = this.dialog.open(CreateDialog);
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef = this.dialog.open(CreateDialog);
+    this.dialogRef.afterClosed().subscribe(result => {
       this._router.navigate(['/heroes'])
     });
   }
@@ -60,15 +61,15 @@ export class EditComponent implements OnInit {
   }
 
   updated(result){
-    const dialogRef = this.dialog.open(UpdateDialog);
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef = this.dialog.open(UpdateDialog);
+    this.dialogRef.afterClosed().subscribe(result => {
       this._router.navigate(['/heroes'])
     });
   }
 
   deleteHero(){
-    const dialogRef = this.dialog.open(DeleteDialog);
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef = this.dialog.open(DeleteDialog);
+    this.dialogRef.afterClosed().subscribe(result => {
       if(result=='delete'){
         this.heroService.delete(this.heroe)
           .subscribe(result => this.onDelete(result), (error) => this.onError('No se ha podido borrar el héroe'))
