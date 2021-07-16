@@ -13,38 +13,62 @@ import { UpdateDialog, CreateDialog, DeleteDialog, ErrorDialog} from '../../comp
 })
 export class EditComponent implements OnInit {
   public heroe:Hero = Hero.getInstance();
+  public strength:string = '';
+  public name:string = '';
   public nameError = false;
   public strengthError = false;
   public isAddMode = false;
   private id:number;
-  public form: FormGroup;
+  public profileForm: FormGroup;
+  submitted = false;
 
   constructor(private route:ActivatedRoute,
     private formBuilder: FormBuilder,
     private _router:Router,
     private heroService:HeroService,
     private dialog:MatDialog) {
-    let id = this.route.snapshot.params['id'];
-    this.isAddMode = !this.id;
+    
+    this.id = this.route.snapshot.params['id'];
+    console.log('Id ', this.id)
+    this.isAddMode = (this.id==0);
 
-    this.form = this.formBuilder.group({
+    this.profileForm = this.formBuilder.group({
       name: ['', Validators.required],
       strength: ['', Validators.required],
   });
 
-    if (!this.isAddMode) {
-        this.heroService.getHero(id)
-          .subscribe(result => this.heroe = result)
-    }
+    
   }
 
   ngOnInit(): void {
+    if (!this.isAddMode) {
+      this.heroService.getHero(this.id)
+        .subscribe(result => this.onHero(result))
+    }
   }
 
+  onHero(result){
+    this.heroe = result;
+    this.name = this.heroe.name;
+    this.strength = this.heroe.strength;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.profileForm.invalid) {
+        return;
+    } 
+    //copy properties
+    this.heroe.name = this.name
+    this.heroe.strength = this.strength
+    //call appropiate method
+    if(this.id==0) this.addHero()
+    else this.updateHero();
+}
+
   addHero(){
-    this.nameError = this.heroe.name == '';
-    this.strengthError = this.heroe.strength =='';
-    if(!this.nameError && !this.strengthError)
       this.heroService.save(this.heroe)
         .subscribe(result => this.added(result), (error) => this.onError('No se ha podido crear el heroe, verifique que el nombre no exista'))
   }

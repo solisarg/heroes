@@ -1,14 +1,14 @@
 <div class="container">
   <form [formGroup]="profileForm" class="example-form" (ngSubmit)="onSubmit()">
     <div class="row text-center mt-4 h3">
-      <span>Héroes latinos <i>{{heroe.name}}</i></span><span class="ml-4"><a href="javascript:void(0)" routerLink="/heroes">Volver</a></span>
+      <span>Héroes latinos <i>{{name}}</i></span><span class="ml-4"><a href="javascript:void(0)" routerLink="/heroes">Volver</a></span>
     </div>
     <div class="row mt-4">
       <div class="col-3">&nbsp;</div>
       <div class="col-6 text-center">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label># Id</mat-label>
-          <input matInput name="name" #name="ngModel" type="number" [(ngModel)]="heroe.id" disabled>
+          <input matInput name="name" type="number" [value]="heroe?.id" disabled>
         </mat-form-field>
       </div>
       <div class="col-3">&nbsp;</div>
@@ -18,7 +18,7 @@
       <div class="col-6 text-center">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Nombre</mat-label>
-          <input matInput formControlName="name" name="name" #name="ngModel" type="text" [(ngModel)]="heroe.name" required>
+          <input matInput formControlName="name" name="name" type="text" [(ngModel)]="name" required>
           <mat-error *ngIf="nameError">
             Por favor escriba un nombre para nuestro héroe
           </mat-error>
@@ -31,7 +31,7 @@
         <div class="col-6 text-center">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Característica</mat-label>
-            <input matInput name="strength" type="text" [(ngModel)]="heroe.strength" required>
+            <input matInput name="strength" formControlName="strength" type="text" [(ngModel)]="strength" required>
             <mat-error *ngIf="nameError">
               Por favor escriba una característica para nuestro héroe
             </mat-error>
@@ -41,14 +41,14 @@
     </div>
     <div class="row">
       <div class="col-5">&nbsp;</div>
-      <div class="col-1 text-center p-2" *ngIf="!heroe.id">
-        <button mat-raised-button color="primary" (click)="addHero()" [disabled]="heroe.name=='' || heroe.strength==''">Agregar</button>
+      <div class="col-1 text-center p-2" *ngIf="!heroe?.id">
+        <button mat-raised-button color="primary">Agregar</button>
       </div>
-      <div class="col-1 text-center p-2" *ngIf="heroe.id" (click)="updateHero()">
+      <div class="col-1 text-center p-2" *ngIf="heroe?.id">
         <button mat-raised-button color="primary">Actualizar</button>
       </div>
-      <div class="col-1 text-center p-2" *ngIf="heroe.id">
-        <button mat-raised-button color="warn" (click)="deleteHero()">Borrar</button>
+      <div class="col-1 text-center p-2" *ngIf="heroe?.id">
+        <button type="button" mat-raised-button color="warn" (click)="deleteHero()">Borrar</button>
       </div>
       <div class="col-5">&nbsp;</div>
     </div>
