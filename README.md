@@ -9,20 +9,17 @@ Basic unit testing is in place. The list of heroes comes from the original Heroe
 where everyone begins at some point.
 We use Angular Material as the base build elements for the whole app.
 
+You can play with the demo at https://devarg3818.com/heroes/
+
  ## Dynamic forms
 There´s a version that use dynamic forms for the edit form that you can check on the dynamic-form branch
 
-You can play with the demo at https://devarg3818.com/heroes/
-
-
+ ## Installing
+ After download the project, run npm install to download all the dependencies. If you don´t have Node installed, download the latest stable version from https://nodejs.org
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
@@ -31,11 +28,3 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
