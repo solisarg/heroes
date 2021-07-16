@@ -9,7 +9,8 @@ Basic unit testing is in place. The list of heroes comes from the original Heroe
 where everyone begins at some point.
 We use Angular Material as the base build elements for the whole app.
 
-There´s a version that use ## dynamic forms ## for the edit form that you can check on the dynamic-form branch
+ ## Dynamic forms
+There´s a version that use dynamic forms for the edit form that you can check on the dynamic-form branch
 
 You can play with the demo at https://devarg3818.com/heroes/
 
